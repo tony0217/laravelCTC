@@ -9,7 +9,7 @@ use Carbon\Carbon;
 class CreateCustomerTable extends Migration
 {
     /**
-     * ejecutar las migrations.
+     * Run the migrations.
      *
      * @return void
      */
@@ -19,44 +19,37 @@ class CreateCustomerTable extends Migration
 
         Schema::create('customer', function (Blueprint $table) {
             $table->bigIncrements('id', true);
-            $table->string('name');
-            $table->string('lastname');
+            $table->string('firstname');
+            $table->string('lastname')->default('-------------');;
             $table->string('email');
-            $table->text('password');
-            $table->bigInteger('phone');
             $table->timestamp('created') ->useCurrent();
-            $table->integer('register_by')->unsigned();
+            $table->string('register_by')->default('user');
             $table->timestamp('modified') ->useCurrent();
             $table->string('modified_by')->default('user');
             $table->boolean('record_deleted')->default(0);
         });
 
-        DB::connection('mysql')->table('customer')->insert([
-            [
-                'name' => 'Atnhony',
-                'lastname' => 'Henriquez',
-                'email' => 'ajhen217@gmail.com',
-                'password' => encrypt('123456'),
-                'phone' => '3122817309',
-                'register_by' => 1
-            ],
-            [
-                'name' => 'maria',
-                'lastname' => 'del barrio',
-                'email' => 'mari@gmail.com',
-                'password' => encrypt('1234523446'),
-                'phone' => '31244434343',
-                'register_by' => 1
-            ],
-            [
-                'name' => 'vannesa',
-                'lastname' => 'martinez',
-                'email' => 'vanessa@gmail.com',
-                'password' => encrypt('3455532'),
-                'phone' => '3102022092',
-                'register_by' => 1
-            ]
-        ]);
+        // DB::connection('mysql')->table('customer')->insert([
+        //     [
+        //         'firstname' => 'Atnhony',
+        //         'lastname' => 'Henriquez',
+        //         'email' => 'ajhen217@gmail.com',
+        //         'register_by' => 1
+        //     ],
+        //     [
+        //         'firstname' => 'maria',
+        //         'lastname' => 'del barrio',
+        //         'email' => 'mari@gmail.com',
+        //         'register_by' => 1
+        //     ],
+        //     [
+        //         'firstname' => 'vannesa',
+        //         'lastname' => '',
+        //         'email' => 'vanessa@gmail.com',
+        //         'register_by' => 1
+        //     ],
+
+        // ]);
     }
 
     /**

@@ -4,6 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+/*
+|--------------------------------------------------------------------------
+| Model Customer
+|--------------------------------------------------------------------------|
+|
+*/
 class CustomerModel extends Model
 {
     protected $table = "customer";
@@ -11,11 +18,9 @@ class CustomerModel extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'name',
+        'firstname',
         'lastname',
         'email',
-        'password',
-        'phone',
         'created',
         'register_by',
         'modified',

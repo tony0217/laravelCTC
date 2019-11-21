@@ -13,10 +13,10 @@ return [
     */
 
     'supportsCredentials' => false,
-    'allowedOrigins' => ['*'],
+    'allowedOrigins' => ['*','GET', 'POST', 'PUT', 'DELETE'],
     'allowedOriginsPatterns' => ['Content-Type', 'X-Requested-With'],
-    'allowedHeaders' => ['*','GET', 'POST', 'PUT',  'DELETE'],
-    'allowedMethods' => ['*'],
+    'allowedHeaders' => ['*','GET', 'POST', 'PUT', 'DELETE'],
+    'allowedMethods' => ['*','GET', 'POST', 'PUT', 'DELETE'],
     'exposedHeaders' => [],
     'maxAge' => 0,
 

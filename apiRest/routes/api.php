@@ -5,10 +5,7 @@ use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | API Routes
-|--------------------------------------------------------------------------
-|
-|Aquí es donde puede registrar rutas API de la aplicación.
-|
+|--------------------------------------------------------------------------|
 |
 */
 
@@ -19,7 +16,7 @@ Route::middleware('auth:api','cors')->get('/user', function (Request $request) {
 
 /*
 |--------------------------------------------------------------------------
-| rutas API de la aplicación.
+| routes API
 |--------------------------------------------------------------------------
 |    Route::get('customer', 'Customer\CustomerController@customer');
 |    Route::get('customer/{id}', 'Customer\CustomerController@customerByID');

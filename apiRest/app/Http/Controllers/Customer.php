@@ -10,7 +10,7 @@ Use Validator;
 class Customer extends Controller
 {
     /**
-     * Función que Retorna todos los registros
+     * function show all records
      *
      * @return Response
      */
@@ -21,7 +21,7 @@ class Customer extends Controller
     }
 
     /**
-     * Función que crea un nuevo  registro
+     * function add a record
      *
      * @param  Request  $request
      * @return Response
@@ -29,8 +29,7 @@ class Customer extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name'=>'required|min:3|max:199',
-            'password'=>'required|min:6|max:199',
+            'firstname'=>'required',
             'email' =>  'required|regex:/^.+@.+$/i'
         ];
         $validator = Validator::make( $request->all(), $rules);
@@ -38,12 +37,11 @@ class Customer extends Controller
             return response()->json($validator->errors(),400);
         }
         $customer= CustomerModel::create( $request->all());
-        $customer->fill(['password' => encrypt($request->password)])->save();
         return response()->json(CustomerModel::get()->last(),201);
     }
 
     /**
-     * Función que retorna un registro especifico
+     * function show a record by id
      *
      * @param  int  $id
      * @return Response
@@ -52,14 +50,13 @@ class Customer extends Controller
     {
         $customer = CustomerModel::find($id);
         if (is_null($customer)) {
-            return response()->json(["message"=>"Registro no encontrado!"],404);
+            return response()->json(["message"=>"Record not found!"],404);
         }
-        $customer->fill(['password' =>  decrypt($customer->password)]);
         return response()->json($customer,200);
     }
 
     /**
-     * Función que actualiza un registro especifico
+     * function Update a record
      *
      * @param  Request  $request
      * @param  int  $id
@@ -69,9 +66,8 @@ class Customer extends Controller
     {
         $date = Carbon::now('America/Bogota');
         $rules = [
-            'name'=>'required|min:3|max:199',
-            'password'=>'required|min:6|max:199',
-            'email' =>  'regex:/^.+@.+$/i'
+            'firstname'=>'required',
+            'email' =>  'required|regex:/^.+@.+$/i'
         ];
         $validator = Validator::make( $request->all(), $rules);
         if($validator->fails()){
@@ -79,16 +75,15 @@ class Customer extends Controller
         }
         $customer = CustomerModel::find($id);
         if (is_null($customer)) {
-            return response()->json(["message"=>"Registro no encontrado!"],404);
+            return response()->json(["message"=>"Record not found!"],404);
         }
         $customer->update($request->all());
-        $customer->update(['password' => encrypt($request->password)]);
-        $customer->update(['modified' =>  $date,'modified_by' => 'Anthony']);
+        $customer->update(['modified' =>  $date,'modified_by' => 'User']);
         return response()->json($customer,200);
     }
 
     /**
-     * Función que elimina un registro especifico
+     * function Delete a record
      *
      * @param  int  $id
      * @return Response
@@ -97,7 +92,7 @@ class Customer extends Controller
     {
         $customer = CustomerModel::find($id);
         if (is_null($customer)) {
-            return response()->json(["message"=>"Registro no encontrado!"],404);
+            return response()->json(["message"=>"Record not found!"],404);
         }
         $customer->delete();
         return response()->json(null,204);
