@@ -28,3 +28,7 @@ Route::middleware('auth:api','cors')->get('/user', function (Request $request) {
 
 route::apiResource('customer','Customer');
 
+route::apiResource('country','Country');
+
+route::apiResource('city','City');
+
