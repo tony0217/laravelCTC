@@ -30,7 +30,8 @@ class Customer extends Controller
     {
         $rules = [
             'firstname'=>'required',
-            'email' =>  'required|regex:/^.+@.+$/i'
+            'email' =>  'required|regex:/^.+@.+$/i',
+            'cc'=>'numeric'
         ];
         $validator = Validator::make( $request->all(), $rules);
         if($validator->fails()){

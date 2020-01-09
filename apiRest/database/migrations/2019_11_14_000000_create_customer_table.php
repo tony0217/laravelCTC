@@ -20,8 +20,12 @@ class CreateCustomerTable extends Migration
         Schema::create('customer', function (Blueprint $table) {
             $table->bigIncrements('id', true);
             $table->string('firstname');
-            $table->string('lastname')->default('-------------');;
+            $table->string('lastname')->nullable();
             $table->string('email');
+            $table->bigInteger('cc')->nullable();
+            $table->date('dob')->nullable();
+            $table->string('country')->nullable();
+            $table->string('city')->nullable();
             $table->timestamp('created') ->useCurrent();
             $table->string('register_by')->default('user');
             $table->timestamp('modified') ->useCurrent();
